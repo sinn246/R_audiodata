@@ -1,15 +1,10 @@
 # R_audiodata
 大量の聴力検査データの集計とグラフ化を行うRプログラム
  （＋サンプルデータ)
-<<<<<<< HEAD
 
 # DEMO
 
 (under construction...)
-=======
-# DEMO
- 
->>>>>>> 6a52ee06272b437660eacc65d55284c6fe1c1c0c
 
 # Features
  
@@ -27,27 +22,16 @@ Rstudioは必ずしも必要ではありませんが、使うことをおすす�
  
 RおよびRstudioのインストールはネットその他で調べてください。
 Rstudio メニューからFile ＞ New Project..　を選択
-<<<<<<< HEAD
 Version Control > Git で出てくるダイアログウィンドウのRepository URL に　https://github.com/sinn246/R_audiodata を指定
-=======
-Version Control > Git で出てくるダイアログウィンドウのRepository URL に　https://github.com/sinn246/R_audiodata　を指定
->>>>>>> 6a52ee06272b437660eacc65d55284c6fe1c1c0c
 でプロジェクトが作成できると思います。
 
 # Usage
  
-<<<<<<< HEAD
 スクリプト　XLSXs_to_csv.R　はエクセルの複数のXSLXファイルを読み込んで一つのcsvファイルを作ります。
 XSLXファイルの構成、データ内容に合わせて変更してください。
 
 できたcsvファイルからオージオグラムを作るサンプルがplot_sample1.Rです。
 各症例のグラフ、平均聴力などのグラフが作れます。
-=======
-スクリプト　XLSXs_to_csv.R　はエクセルの複数のXSLXファイルを読み込んで一つのcsvファイルを作ります
-XSLXファイルの構成、データ内容に合わせて変更してください
-
-できたcsvファイルからオージオグラムを作るサンプルがplot_sample1.Rです。各症例の
->>>>>>> 6a52ee06272b437660eacc65d55284c6fe1c1c0c
 
 # Note
  

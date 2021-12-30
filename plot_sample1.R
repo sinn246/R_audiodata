@@ -43,7 +43,7 @@ for(c in cause){
       audiograms[[i]] <- plot_audiogram_J(r0[i,],width=40) 
     }
     ml <- marrangeGrob(audiograms, nrow=5, ncol=4, top="")
-    ggsave(file=sprintf("OUTPUT/audios-%s.pdf",c),plot=ml,dpi=300,width = 8,height=11.5)
+    ggsave(file=sprintf("OUTPUT/audiograms-%s.pdf",c),plot=ml,dpi=300,width = 8,height=11.5)
   }
 }
 
@@ -89,4 +89,4 @@ for(c in cause){
 }
 
 ml <- marrangeGrob(glist, nrow=3, ncol=1, top="")
-ggsave(file="OUTPUT/plots.pdf",plot=ml,dpi=300,width = 8,height=11.5)
+ggsave(file="OUTPUT/average_plots.pdf",plot=ml,dpi=300,width = 8,height=11.5)

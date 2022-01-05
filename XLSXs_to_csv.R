@@ -2,12 +2,14 @@ library(readxl)
 library(tidyverse)
 library(logr)
 
-directory = "DATA/"
-
-files = dir(path=directory,pattern = "*.xlsx")
-res <- NULL
 
 log_open("merge")
+
+outfolder <- "OUTPUT"
+if(!file.exists(outfolder)) {
+  dir.create(outfolder)
+}
+
 
 cnames <- c("Facility","ID","Age","Sex","Cause0","Cause",
             "RA125","RA250","RA500","RA1000","RA2000","RA4000","RA8000",
@@ -16,8 +18,12 @@ cnames <- c("Facility","ID","Age","Sex","Cause0","Cause",
             "LB250","LB500","LB1000","LB2000","LB4000",
             "Kainyuu","Method","HA","Comment")
 
+datafolder = "DATA/"
+files = dir(path=datafolder,pattern = "*.xlsx")
+res <- NULL
+
 for(f0 in files){
-  f <- paste0(directory,f0)
+  f <- paste0(datafolder,f0)
   d0 <- read_xlsx(f,sheet=2)
   shisetumei <- colnames(d0)[3]
   if(shisetumei=="...3"){
@@ -169,7 +175,7 @@ for(r in 1:nrow(res)){
 
 
 
-write_excel_csv(res,"OUTPUT/merged_data_SO.csv",na="")
+write_excel_csv(res,paste0(outfolder,"/merged_data_SO.csv"),na="")
 
 list_scaleout_num = c("","","","","","",
                       "75","95","115","115","115","115","105",
@@ -193,5 +199,5 @@ for(c in 7:30){
     }
   }
 }
-write_excel_csv(res,"OUTPUT/merged_data.csv",na="")
+write_excel_csv(res,paste0(outfolder,"/merged_data.csv"),na="")
 log_close()

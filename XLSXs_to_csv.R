@@ -24,20 +24,19 @@ res <- NULL
 
 for(f0 in files){
   f <- paste0(datafolder,f0)
-  d0 <- read_xlsx(f,sheet=2)
+  d0 <- read_xlsx(f,sheet=2) #2シート目を読み込む
   shisetumei <- colnames(d0)[3]
-  if(shisetumei=="...3"){
+  if(shisetumei=="...3"){ #施設名が空欄のとき
     shisetumei <- f0
   }
-  d <- read_xlsx(f,sheet=2,skip=8)
+  d <- read_xlsx(f,sheet=2,skip=8)　#2シート目 先頭8行を無視して読み込む
   d %>% mutate(blank = "") %>%
     select(1:33) %>% mutate(across(1:33,as.character)) %>%
     add_column(facility = shisetumei,.before="...1") -> dx
+  colnames(dx) <- cnames
   if(is.null(res)){
-    colnames(dx) <- cnames
     res <- dx
   }else{
-    colnames(dx) <- cnames
     res <- bind_rows(res,dx)
   }
   log_print(sprintf("File:%s 施設:%s  %d cases",f,shisetumei,nrow(dx)))

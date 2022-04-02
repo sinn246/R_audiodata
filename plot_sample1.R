@@ -56,7 +56,9 @@ res %>%  filter(!is.na(Cause))  -> res
 res$Cause <- factor(res$Cause,cause)
 res %>% mutate(Title = paste(ID,Facility)) -> res
 
-#　X　から始まるのが悪い方の聴力　Y がいい方の聴力
+
+# このグラフでは左右は関係なく、Xに良聴耳　Yに悪い方を入れるようにする
+
 res %>%
   mutate(RA3 = (RA500+RA1000+RA2000)/3,LA3 = (LA500+LA1000+LA2000)/3) %>%
   mutate(XA125 = if_else(RA3>LA3,RA125,LA125),YA125 = if_else(RA3<LA3,RA125,LA125)) %>%
@@ -72,7 +74,9 @@ res %>%
   mutate(XB2000 = if_else(RA3>LA3,RB2000,LB2000),YB2000 = if_else(RA3<LA3,RB2000,LB2000)) %>%
   mutate(XB4000 = if_else(RA3>LA3,RB4000,LB4000),YB4000 = if_else(RA3<LA3,RB4000,LB4000)) -> res
 
+# 元のデータにあった左右というのは不要になったので消す
 select(res,-str_subset(colnames(res),"^[LR]\\D\\d+$")) -> res
+
 nc <- ncol(res)
 res %>% select(1:nc) %>% mutate(across(1:nc,as.character)) -> res 
 

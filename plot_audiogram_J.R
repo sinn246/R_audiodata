@@ -1,3 +1,9 @@
+# plot_audiogram_J オージオグラムを描く
+#入力：data.frameのうち1行分　列名が"LAxxx"だと左気導xxxHz RByyyだと右骨導yyyHz の聴力閾値　
+#   スケールアウトは　”zzz+” のように数字の後に"+"をつけるとスケールアウトと扱う
+#文字の大きさなどをデフォルトから変更したい場合は以下の引数を操作
+#返値：ggplotのグラフなので、それを表示したり、印刷したり、他のグラフに組み込んだりしてください
+
 plot_audiogram_J <- function(df,
                              width=80, # グラフの横のサイズ（mm) これに合わせてフォント・点の大きさを調整
                              BW = FALSE, #　白黒ならTRUE
@@ -22,7 +28,7 @@ plot_audiogram_J <- function(df,
   yajirusi_tate = 6
   yajirusi_yoko = 4 / 20
   arrow_len = width / 60
-  cs <- str_subset(colnames(df),"^\\D\\D\\d+$")
+  cs <- str_subset(colnames(df),"^[LR][AB]\\d+$")
   nc <- ncol(df)
   ldf <- df %>% mutate(across(1:all_of(nc),as.character)) %>%
     pivot_longer(all_of(cs),names_to = c("ear","mode","freq"),names_pattern = "^(\\D)(\\D)(\\d+)$",values_to = "dB" ) %>%
@@ -81,6 +87,12 @@ plot_audiogram_J <- function(df,
                    #   ,axis.text.x = element_text(angle=90, hjust=1) #コメントを消すとX軸が縦書きに
   ))
 }
+
+# plotGroupMean 多数の聴力図を重ねたもの、及び平均聴力を描く
+#入力：data.frameのうち必要分のデータ　列名が"LAxxx"だと左気導xxxHz RByyyだと右骨導yyyHz の聴力閾値
+#  としていますが、術前術後の変化などなら他の文字にしても構いません。アルファベット順に処理されると思います。
+#   スケールアウトは対応しないので、予めスケールアウトなら+5dB として扱う、欠測値とするなど予め処理しておく必要あり
+#ラベルは変更できます。気導、骨導などにしていますが、術前／術後にするとか
 
 plotGroupMean <- function(
   df,
